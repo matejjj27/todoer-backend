@@ -6,8 +6,9 @@ export const config: PaginateConfig<Todo> = {
   nullSort: 'last',
   defaultSortBy: [['createdAt', 'ASC']],
   searchableColumns: ['id'],
-  select: ['createdAt', 'id', 'updatedAt'],
+  select: ['id', 'dueDate', 'isCompleted', 'createdAt', 'updatedAt'],
   filterableColumns: {
     id: [FilterOperator.EQ, FilterSuffix.NOT],
+    name: [FilterOperator.EQ, FilterSuffix.NOT],
   },
 };

@@ -60,7 +60,7 @@ export class CategoriesService {
       );
     } catch (error) {
       throw new HttpException(
-        { error: 'Failed to update user', status: HttpStatus.BAD_REQUEST },
+        { error: 'Failed to update category', status: HttpStatus.BAD_REQUEST },
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -70,7 +70,7 @@ export class CategoriesService {
     try {
       const result = await this.categoriesRepository.softDelete(id);
       if (result.affected === 0) {
-        throw new HttpException('category not found', HttpStatus.NOT_FOUND);
+        throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
       }
     } catch (error) {
       throw new HttpException(
