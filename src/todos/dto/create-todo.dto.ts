@@ -1,14 +1,14 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { SubCategory } from 'src/sub-categories/sub-category.entity';
 
 export class CreateTodoDto {
   @IsNotEmpty()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   dueDate: Date;
 
-  @IsNotEmpty()
+  @IsOptional()
   isCompleted: boolean;
 
   @IsNotEmpty()

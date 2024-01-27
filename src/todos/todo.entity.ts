@@ -17,7 +17,7 @@ export class Todo {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: '2024-01-27T12:30:45Z' })
   dueDate: Date;
 
   @Column({ default: false })

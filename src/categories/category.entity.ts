@@ -17,7 +17,7 @@ export class Category {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: 'red' })
   color: string;
 
   @OneToMany(
