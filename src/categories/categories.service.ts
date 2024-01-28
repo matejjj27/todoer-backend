@@ -2,8 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere, DeepPartial } from 'typeorm';
 import { Category } from './category.entity';
-import { PaginateQuery, Paginated, paginate } from 'nestjs-paginate';
-import { config } from './paginate-config';
 import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
@@ -13,9 +11,11 @@ export class CategoriesService {
     private categoriesRepository: Repository<Category>,
   ) {}
 
-  async findAll(query: PaginateQuery): Promise<Paginated<Category>> {
+  async findAll(): Promise<Category[]> {
     try {
-      return await paginate(query, this.categoriesRepository, config);
+      return this.categoriesRepository.find({
+        relations: ['subCategories', 'subCategories.todos'],
+      });
     } catch (error) {
       throw new HttpException(
         {

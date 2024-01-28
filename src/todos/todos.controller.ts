@@ -41,9 +41,9 @@ export class TodosController {
   @HttpCode(HttpStatus.OK)
   update(
     @Param('id') id: string,
-    @Body() updateProfileDto: UpdateTodoDto,
+    @Body() updateTodoDto: UpdateTodoDto,
   ): Promise<Todo> {
-    return this.todosService.update(id, updateProfileDto);
+    return this.todosService.update(id, updateTodoDto);
   }
 
   @Delete(':id')

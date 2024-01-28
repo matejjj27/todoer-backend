@@ -11,5 +11,6 @@ export const config: PaginateConfig<Todo> = {
   filterableColumns: {
     id: [FilterOperator.EQ, FilterSuffix.NOT],
     name: [FilterOperator.EQ, FilterSuffix.NOT],
+    'subCategory.id': [FilterOperator.EQ, FilterSuffix.NOT],
   },
 };

@@ -10,7 +10,6 @@ import {
   Param,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { Paginate, PaginateQuery, Paginated } from 'nestjs-paginate';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -21,10 +20,8 @@ export class CategoriesController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  public findAll(
-    @Paginate() query: PaginateQuery,
-  ): Promise<Paginated<Category>> {
-    return this.categoriesService.findAll(query);
+  public findAll(): Promise<Category[]> {
+    return this.categoriesService.findAll();
   }
 
   @Get(':id')
