@@ -20,6 +20,9 @@ export class Todo {
   @Column({ default: '2024-01-27T12:30:45Z' })
   dueDate: Date;
 
+  @Column()
+  position: number;
+
   @Column({ default: false })
   isCompleted: boolean;
 

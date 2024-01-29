@@ -33,10 +33,14 @@ export class TodosService {
     });
   }
 
-  create(createTodoDto: CreateTodoDto): Promise<Todo> {
+  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
     try {
+      const todosCount = await this.todosRepository.count();
       return this.todosRepository.save(
-        this.todosRepository.create(createTodoDto),
+        this.todosRepository.create({
+          ...createTodoDto,
+          position: todosCount + 1,
+        }),
       );
     } catch (error) {
       throw new HttpException(

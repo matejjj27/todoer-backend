@@ -12,6 +12,9 @@ export class UpdateTodoDto {
   isCompleted: boolean;
 
   @IsNotEmpty()
+  position: number;
+
+  @IsNotEmpty()
   @ValidateNested()
   subCategory: SubCategory;
 }

@@ -22,7 +22,10 @@ export class SubCategory {
   @Column()
   color: string;
 
-  @OneToMany(() => Todo, (todo: Todo) => todo.subCategory)
+  @Column()
+  position: number;
+
+  @OneToMany(() => Todo, (todo: Todo) => todo.subCategory, { cascade: true })
   todos: Todo[];
 
   @ManyToOne(() => Category, (category) => category.subCategories)

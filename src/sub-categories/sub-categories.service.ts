@@ -10,12 +10,12 @@ import { CreateCategoryDto } from 'src/categories/dto/create-category.dto';
 export class SubCategoriesService {
   constructor(
     @InjectRepository(SubCategory)
-    private categoriesRepository: Repository<SubCategory>,
+    private subCategoriesRepository: Repository<SubCategory>,
   ) {}
 
   async findAll(query: PaginateQuery): Promise<Paginated<SubCategory>> {
     try {
-      return await paginate(query, this.categoriesRepository, config);
+      return await paginate(query, this.subCategoriesRepository, config);
     } catch (error) {
       throw new HttpException(
         {
@@ -28,16 +28,20 @@ export class SubCategoriesService {
   }
 
   findOne(fields: FindOptionsWhere<SubCategory>): Promise<SubCategory | null> {
-    return this.categoriesRepository.findOne({
+    return this.subCategoriesRepository.findOne({
       where: fields,
       relations: ['todos'],
     });
   }
 
-  create(createCategoryDto: CreateCategoryDto): Promise<SubCategory> {
+  async create(createCategoryDto: CreateCategoryDto): Promise<SubCategory> {
     try {
-      return this.categoriesRepository.save(
-        this.categoriesRepository.create(createCategoryDto),
+      const subCategoriesCount = await this.subCategoriesRepository.count();
+      return this.subCategoriesRepository.save(
+        this.subCategoriesRepository.create({
+          ...createCategoryDto,
+          position: subCategoriesCount + 1,
+        }),
       );
     } catch (error) {
       throw new HttpException(
@@ -55,8 +59,8 @@ export class SubCategoriesService {
     payload: DeepPartial<SubCategory>,
   ): Promise<SubCategory> {
     try {
-      return this.categoriesRepository.save(
-        this.categoriesRepository.create({
+      return this.subCategoriesRepository.save(
+        this.subCategoriesRepository.create({
           id,
           ...payload,
         }),
@@ -74,7 +78,7 @@ export class SubCategoriesService {
 
   async softDelete(id: SubCategory['id']): Promise<void> {
     try {
-      const result = await this.categoriesRepository.softDelete(id);
+      const result = await this.subCategoriesRepository.softDelete(id);
       if (result.affected === 0) {
         throw new HttpException('subCategory not found', HttpStatus.NOT_FOUND);
       }

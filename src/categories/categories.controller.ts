@@ -13,6 +13,7 @@ import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { MoveTodoDto } from './dto/move-todo.dto';
 
 @Controller('categories')
 export class CategoriesController {
@@ -36,13 +37,22 @@ export class CategoriesController {
     return this.categoriesService.create(createProfileDto);
   }
 
+  @Patch('moveTodo/:id')
+  @HttpCode(HttpStatus.OK)
+  moveTodo(
+    @Param('id') id: string,
+    @Body() moveTodoDto: MoveTodoDto,
+  ): Promise<Category> {
+    return this.categoriesService.moveTodo(id, moveTodoDto);
+  }
+
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   update(
     @Param('id') id: string,
-    @Body() updateProfileDto: UpdateCategoryDto,
+    @Body() updateCategoryDto: UpdateCategoryDto,
   ): Promise<Category> {
-    return this.categoriesService.update(id, updateProfileDto);
+    return this.categoriesService.update(id, updateCategoryDto);
   }
 
   @Delete(':id')

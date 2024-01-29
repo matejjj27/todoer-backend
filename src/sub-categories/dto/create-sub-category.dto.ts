@@ -9,5 +9,8 @@ export class CreateSubCategoryDto {
   color: string;
 
   @IsNotEmpty()
+  position: number;
+
+  @IsNotEmpty()
   category: Category;
 }

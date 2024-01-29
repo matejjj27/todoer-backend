@@ -20,9 +20,13 @@ export class Category {
   @Column({ default: 'red' })
   color: string;
 
+  @Column()
+  position: number;
+
   @OneToMany(
     () => SubCategory,
     (subCategory: SubCategory) => subCategory.category,
+    { cascade: true },
   )
   subCategories: SubCategory[];
 

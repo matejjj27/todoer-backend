@@ -5,5 +5,8 @@ export class UpdateCategoryDto {
   name: string;
 
   @IsNotEmpty()
+  position: number;
+
+  @IsNotEmpty()
   color: string;
 }

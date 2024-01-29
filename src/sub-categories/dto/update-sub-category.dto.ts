@@ -9,5 +9,8 @@ export class UpdateSubCategoryDto {
   color: string;
 
   @IsNotEmpty()
+  position: number;
+
+  @IsNotEmpty()
   category: Category;
 }

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
 import { SubCategory } from 'src/sub-categories/sub-category.entity';
 
 export class CreateTodoDto {
@@ -12,5 +12,9 @@ export class CreateTodoDto {
   isCompleted: boolean;
 
   @IsNotEmpty()
+  position: number;
+
+  @IsNotEmpty()
+  @ValidateNested()
   subCategory: SubCategory;
 }
