@@ -17,9 +17,12 @@ import { TodosModule } from './todos/todos.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: true,
-      ssl: true,
       autoLoadEntities: true,
+      synchronize: false,
+      ssl: {
+        ca: process.env.CA_CERTIFICATE,
+        // other SSL options
+      },
     }),
     CategoriesModule,
     SubCategoriesModule,
