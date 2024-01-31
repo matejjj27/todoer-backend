@@ -18,10 +18,10 @@ import { TodosModule } from './todos/todos.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
       ssl: {
-        ca: process.env.CA_CERTIFICATE,
-        // other SSL options
+        ca: 'path/to/ca.pem',
+        rejectUnauthorized: false,
       },
     }),
     CategoriesModule,
