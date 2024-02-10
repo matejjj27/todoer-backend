@@ -47,7 +47,7 @@ export class CategoriesService {
   findOne(fields: FindOptionsWhere<Category>): Promise<Category | null> {
     return this.categoriesRepository.findOne({
       where: fields,
-      relations: ['subCategories'],
+      relations: ['subCategories', 'subCategories.todos'],
     });
   }
 
